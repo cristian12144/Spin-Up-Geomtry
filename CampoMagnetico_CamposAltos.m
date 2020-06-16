@@ -1,10 +1,10 @@
 function [Hr, Ht]=CampoMagnetico_CamposAltos(nder,ndet,ndt,tf,Mr,Mt,ji)
 
-her=1/(nder-1);                % Paso en coordenada radial
+her=1/(nder-1);                % Step in radial direction
 het=2*pi/ndet;                 % Paso en coordenada angular
 htt=tf/(ndt-1);                % Paso en coordenada temporal
 
-r=zeros(nder,1);  teta=zeros(ndet,1); t=zeros(ndt,1);  % InicializaciÛn de variables
+r=zeros(nder,1);  teta=zeros(ndet,1); t=zeros(ndt,1);  % Inicializaci√≥n de variables
 
 for k=1:nder
     r(k)=her*(k-1); % Se establece el dominio de los puntos del espacio en la coordenada radial r=0 a r=1.
@@ -66,7 +66,7 @@ for i=1:nder-1
         
         
         
-        A(nder*ndet+(i-1)*ndet+j,(i-1)*ndet+j)=-Z(i+1); % AC¡ COMETÕIII UN ERROR QUE ME COST” 2 DÕAS DE RETRASO. TAN SOLO OLVID… COLOCAR (i-1) OJO !!!
+        A(nder*ndet+(i-1)*ndet+j,(i-1)*ndet+j)=-Z(i+1); % AC√Å COMET√çIII UN ERROR QUE ME COST√ì 2 D√çAS DE RETRASO. TAN SOLO OLVID√â COLOCAR (i-1) OJO !!!
         A(nder*ndet+(i-1)*ndet+j,(i-0)*ndet+j)=Zp(i+1); %OK
         A(nder*ndet+(i-1)*ndet+j,nder*ndet+(i-0)*ndet+j)=c;
         
@@ -125,9 +125,9 @@ for k=1:ndt
     
     for j=1:ndet
         
-        C(ndet*(nder-1)+j,k)=-ji*Mr(1,j,k);              % CONDICI”N DE FRONTERA EN R=0!
-%       C(ndet*(nder-1)+j,k)=-(ur-1)*Mr(1,j,k);                                                                                                                                                      %         C(1*nder*ndet+1-j,k)=+sin(t(k)-teta(ndet+1-j));  % CONDICI”N DE FRONTERA SENG⁄N LO ESTABLECIDO EN LA TESIS DE RINALDI P-129 -ji*Mr(nder,ndet+1-j,k);%
-        C(2*nder*ndet+1-j,k)=-cos(t(k)-teta(ndet+1-j));  % CONDICI”N DE FRONTERA APLICANDO LA ECUACI”N PARA QUE EXISTA CAMPO ROTATIVO
+        C(ndet*(nder-1)+j,k)=-ji*Mr(1,j,k);              % CONDICI√ìN DE FRONTERA EN R=0!
+%       C(ndet*(nder-1)+j,k)=-(ur-1)*Mr(1,j,k);                                                                                                                                                      %         C(1*nder*ndet+1-j,k)=+sin(t(k)-teta(ndet+1-j));  % CONDICI√ìN DE FRONTERA SENG√öN LO ESTABLECIDO EN LA TESIS DE RINALDI P-129 -ji*Mr(nder,ndet+1-j,k);%
+        C(2*nder*ndet+1-j,k)=-cos(t(k)-teta(ndet+1-j));  % CONDICI√ìN DE FRONTERA APLICANDO LA ECUACI√ìN PARA QUE EXISTA CAMPO ROTATIVO
         
     end
     
@@ -145,17 +145,17 @@ for k=1:ndt
     end
     
     
-    Hr_=reshape(Hrk(:,k),ndet,nder); % DEBIDO A LA FORMA EN QUE MATLAB REORDENA EL VECTOR Hrk DE UN VECTOR COLUMNA A UNA MATRIZ (ES POR ESO, OJO AHÕ)
-    Ht_=reshape(Htk(:,k),ndet,nder); % POR ESO ES QUE EN ESTAS TRES LINEAS EST¡ ndet,nder Y NO AL CONTRARIO.
+    Hr_=reshape(Hrk(:,k),ndet,nder); % DEBIDO A LA FORMA EN QUE MATLAB REORDENA EL VECTOR Hrk DE UN VECTOR COLUMNA A UNA MATRIZ (ES POR ESO, OJO AH√ç)
+    Ht_=reshape(Htk(:,k),ndet,nder); % POR ESO ES QUE EN ESTAS TRES LINEAS EST√Å ndet,nder Y NO AL CONTRARIO.
 %     Hk_=reshape(Hkk(:,k),ndet,nder);
     
     
    
-    Hr(:,:,k)=Hr_';                 % Para que quede como debe cada pareja (i,j) sea "i" el radio y "j" el ·ngulo.
-    Ht(:,:,k)=Ht_';                 % Para que quede como debe cada pareja (i,j) sea "i" el radio y "j" el ·ngulo.
-%     Hkn(:,:,k)=Hk_';                 % Para que quede como debe cada pareja (i,j) sea "i" el radio y "j" el ·ngulo.
+    Hr(:,:,k)=Hr_';                 % Para que quede como debe cada pareja (i,j) sea "i" el radio y "j" el √°ngulo.
+    Ht(:,:,k)=Ht_';                 % Para que quede como debe cada pareja (i,j) sea "i" el radio y "j" el √°ngulo.
+%     Hkn(:,:,k)=Hk_';                 % Para que quede como debe cada pareja (i,j) sea "i" el radio y "j" el √°ngulo.
     
-end                               % AquÌ finaliza la el c·lculo de las componentes de los campos H para un tiempo t(k).
+end                               % Aqu√≠ finaliza la el c√°lculo de las componentes de los campos H para un tiempo t(k).
 
 % Hr=Hrn;
 % Ht=Htn;
